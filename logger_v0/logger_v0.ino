@@ -2,6 +2,8 @@
 
 const int MPU = 0x68;  //MPU6050 I2C address
 float ax, ay, az;
+uint8_t axh, axl, ayh, ayl, azh, azl;
+int16_t axRaw, ayRaw, azRaw;
 
 unsigned long lastSample;
 float magnitude;
@@ -31,10 +33,22 @@ void loop() {
     Wire.write(0x3B);  // Start with register 0x3B (ACCEL_XOUT_H)
     Wire.endTransmission(false);
     Wire.requestFrom(MPU, 6, true);  // Read 6 registers total, each axis value is stored in 2 registers
+
+    axh = Wire.read();
+    axl = Wire.read();
+    ayh = Wire.read();
+    ayl = Wire.read();
+    azh = Wire.read();
+    azl = Wire.read();
+
+    axRaw = axh << 8 | axl;
+    ayRaw = ayh << 8 | ayl;
+    azRaw = azh << 8 | azl;
+
     //For a range of +-8g, we need to divide the raw values by 4096, according to the datasheet
-    ax = (Wire.read() << 8 | Wire.read()) / 4096.0;  // X-axis value
-    ay = (Wire.read() << 8 | Wire.read()) / 4096.0;  // Y-axis value
-    az = (Wire.read() << 8 | Wire.read()) / 4096.0;  // Z-axis value
+    ax = axRaw / 4096.0;  // X-axis value
+    ay = ayRaw / 4096.0;  // Y-axis value
+    az = azRaw / 4096.0;  // Z-axis value
 
     magnitude = sqrt(ax*ax + ay*ay + az*az);
 
