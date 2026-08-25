@@ -19,7 +19,9 @@ _(photo of the real thing on my waistband)_
 
 ## 3. The signal
 
-_(serial plot showing my own footsteps)_
+![stage2 rest to running, sampled at 10 Hz](image.png)
+![stage2 baseline noise, sampled at 10 Hz](image-1.png)
+![stage2 running to rest, sampled at 10 Hz](image-2.png)
 
 ## 4. Design decisions
 
