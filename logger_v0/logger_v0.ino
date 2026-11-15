@@ -28,6 +28,9 @@ void setup() {
 void loop() {
 
   if (millis() - lastSample >= 10) {
+
+    lastSample = millis();
+
     // Read acceleromter data
     Wire.beginTransmission(MPU);
     Wire.write(0x3B);  // Start with register 0x3B (ACCEL_XOUT_H)
@@ -52,7 +55,7 @@ void loop() {
 
     magnitude = sqrt(ax*ax + ay*ay + az*az);
 
-    /*
+    
     Serial.print("X: ");
     Serial.print(ax, 4);
     Serial.print(" | ");
@@ -63,9 +66,7 @@ void loop() {
     Serial.print(az, 4);
     Serial.print(" | ");
     
-    Serial.print("Magnitude: "); */
+    Serial.print("Magnitude: "); 
     Serial.println(magnitude, 4);
-
-    lastSample = millis();
   }
 }
