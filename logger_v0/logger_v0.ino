@@ -27,6 +27,8 @@ void setup() {
 
 void loop() {
 
+  
+
   if (millis() - lastSample >= 10) {
 
     lastSample = millis();
@@ -55,7 +57,7 @@ void loop() {
 
     magnitude = sqrt(ax*ax + ay*ay + az*az);
 
-    
+    /*
     Serial.print("X: ");
     Serial.print(ax, 4);
     Serial.print(" | ");
@@ -66,7 +68,7 @@ void loop() {
     Serial.print(az, 4);
     Serial.print(" | ");
     
-    Serial.print("Magnitude: "); 
+    Serial.print("Magnitude: "); */
     Serial.println(magnitude, 4);
   }
 }
