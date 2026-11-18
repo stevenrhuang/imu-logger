@@ -8,6 +8,9 @@ int16_t axRaw, ayRaw, azRaw;
 unsigned long lastSample;
 float magnitude;
 
+uint32_t data_count = 0;
+float hz;
+
 void setup() {
   Serial.begin(115200);
   Wire.begin();
@@ -27,9 +30,9 @@ void setup() {
 
 void loop() {
 
-  
-
   if (millis() - lastSample >= 10) {
+
+    data_count += 1;
 
     lastSample = millis();
 
@@ -70,5 +73,12 @@ void loop() {
     
     Serial.print("Magnitude: "); */
     Serial.println(magnitude, 4);
+
+/*    hz = data_count/(millis()/1000.0);
+
+    Serial.print(hz, 4);
+    Serial.println(" Hz");*/
+
   }
 }
+
